@@ -1,0 +1,27 @@
+<mat-card>
+    <form #sessionForm="ngForm" (ngSubmit)="save(sessionForm.value)">
+      <mat-card-header>
+        <mat-card-title><h2>{{session.movieTitle ? 'Edit' : 'Add'}} Title</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <input type="hidden" name="href" [(ngModel)]="session.href">
+        <mat-form-field>
+          <input matInput placeholder="Session Name" [(ngModel)]="session.movieTitle"
+                 required name="movieTitle" #movieTitle>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="!sessionForm.form.valid">Save</button>
+        <button mat-raised-button color="secondary" (click)="remove(session.id)"
+                *ngIf="session.id" type="button">Delete</button>
+        <a mat-button routerLink="/session-list">Cancel</a>
+      </mat-card-actions>
+      <mat-card-footer>
+        <div class="giphy">
+          <img src="{{session.giphyUrl}}" alt="{{session.movieTitle}}">
+          <h2>{{session.movieTitle}}</h2>
+        </div>
+      </mat-card-footer>
+    </form>
+  </mat-card>
